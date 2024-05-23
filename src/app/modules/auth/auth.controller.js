@@ -7,7 +7,6 @@ class AuthController extends BaseController {
     router = Router();
     constructor() {
         super();
-        this.authRepository = new AuthRepository();
     }
     init = app => {
         this.router.post('/signUp', this.signUp);
@@ -17,7 +16,7 @@ class AuthController extends BaseController {
     signUp = async (req, res) => {
         try {
             const { email, password } = req.body;
-            const user = await this.authRepository.createUser({ email, password });
+            const user = await AuthRepository.createUser({ email, password });
             res.status(201).json(user);
         } catch (err) {
             console.error('Error creating user:', err);

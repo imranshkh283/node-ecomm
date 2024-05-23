@@ -1,12 +1,10 @@
-const User = require('../user/user.model');
-
+const UserRepository = require('../user/user.repository');
 class AuthRepository {
     constructor() { }
 
-    createUser = async ({ email, password }) => {
-
-        const user = new User({ email, password });
-        return await user.save();
+    static async createUser({ email, password }) {
+        const user = await UserRepository.createUser({ email, password });
+        return user;
     }
 
 }
