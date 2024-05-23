@@ -1,6 +1,6 @@
-const User = require('../user/user.model');
+const User = require('./user.model');
 
-class AuthRepository {
+class UserRepository {
     constructor() { }
 
     createUser = async ({ email, password }) => {
@@ -11,4 +11,4 @@ class AuthRepository {
 
 }
 
-module.exports = AuthRepository;
+module.exports = UserRepository;

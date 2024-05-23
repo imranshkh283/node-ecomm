@@ -1,13 +1,13 @@
 const { Router, Request } = require("express");
 const BaseController = require("../BaseController");
-const UserRepository = require('./auth.repository');
+const AuthRepository = require('./auth.repository');
 
 
 class AuthController extends BaseController {
     router = Router();
     constructor() {
         super();
-        this.userRepository = new UserRepository();
+        this.authRepository = new AuthRepository();
     }
     init = app => {
         this.router.post('/signUp', this.signUp);
@@ -17,7 +17,7 @@ class AuthController extends BaseController {
     signUp = async (req, res) => {
         try {
             const { email, password } = req.body;
-            const user = await this.userRepository.createUser({ email, password });
+            const user = await this.authRepository.createUser({ email, password });
             res.status(201).json(user);
         } catch (err) {
             console.error('Error creating user:', err);
