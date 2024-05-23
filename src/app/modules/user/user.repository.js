@@ -9,6 +9,18 @@ class UserRepository {
         return await user.save();
     }
 
+    static async getUserByEmail(email) {
+        return await User.findOne({ email });
+    }
+
+    static async getUserById(id) {
+        return await User.findById(id);
+    }
+
+    static async isEmailExists(email) {
+        return await User.exists({ email });
+    }
+
 }
 
 module.exports = UserRepository;
