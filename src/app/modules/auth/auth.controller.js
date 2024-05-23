@@ -15,12 +15,10 @@ class AuthController extends BaseController {
     }
 
     signUp = async (req, res) => {
-        console.log(req.body);
-        return false;
         try {
+            const { email, password } = req.body;
             const user = await this.userRepository.createUser({ email, password });
-            console.log('User created:', user);
-            // res.status(201).json(user);
+            res.status(201).json(user);
         } catch (err) {
             console.error('Error creating user:', err);
             res.status(500).json({ error: 'Error creating user' });

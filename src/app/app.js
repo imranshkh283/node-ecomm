@@ -8,8 +8,8 @@ class App {
 
     constructor() {
         this.app = express();
-        registerRoutes(this.app);
         this.middleware();
+        registerRoutes(this.app);
     }
 
     middleware() {
