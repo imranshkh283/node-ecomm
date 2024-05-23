@@ -10,6 +10,7 @@ class AuthController extends BaseController {
     }
     init = app => {
         this.router.post('/signUp', this.signUp);
+        this.router.post('/signIn', this.signIn);
         app.use('/api/auth/', this.router)
     }
 
@@ -21,6 +22,20 @@ class AuthController extends BaseController {
         } catch (err) {
             console.error('Error creating user:', err);
             res.status(500).json({ error: 'Error creating user' });
+        }
+    }
+
+    signIn = async (req, res) => {
+        try {
+            const { email, password } = req.body;
+            const user = await AuthRepository.signIn({ email, password });
+            if (!user) {
+                return res.status(401).json({ error: 'Invalid email or password' });
+            }
+
+        } catch (err) {
+            console.error('Error signing in:', err);
+            res.status(500).json({ error: 'Error signing in' });
         }
     }
 }

@@ -12,6 +12,17 @@ class AuthRepository {
         return user;
     }
 
+    static async signIn({ email, password }) {
+
+        const user = await UserRepository.getUserByEmail(email);
+
+        if (user) {
+            const comparePassword = await user.comparePassword(password);
+        }
+
+        return user;
+    }
+
 }
 
 module.exports = AuthRepository;
