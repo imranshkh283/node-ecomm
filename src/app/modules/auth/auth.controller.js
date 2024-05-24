@@ -1,6 +1,7 @@
-const { Router, Request } = require("express");
+const { Router } = require("express");
 const BaseController = require("../BaseController");
 const AuthRepository = require('./auth.repository');
+const { generateToken } = require('../../../utils/jwtUtils');
 
 
 class AuthController extends BaseController {
@@ -32,6 +33,23 @@ class AuthController extends BaseController {
             if (!user) {
                 return res.status(401).json({ error: 'Invalid email or password' });
             }
+
+            const comparePassword = await user.comparePassword(password)
+
+            if (!comparePassword) {
+                return res.status(401).json({ error: 'Invalid email or password' });
+            }
+            const _user = {
+                email: user.email,
+                id: user._id
+            }
+
+            const token = generateToken(_user);
+
+            res.status(200).json({
+                _user,
+                token
+            });
 
         } catch (err) {
             console.error('Error signing in:', err);
