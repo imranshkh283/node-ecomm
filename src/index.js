@@ -1,4 +1,4 @@
-
+require("module-alias/register")
 const app = require("./app/app");
 require('./config/mongoose')(app);
 

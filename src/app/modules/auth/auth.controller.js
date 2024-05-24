@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const BaseController = require("../BaseController");
 const AuthRepository = require('./auth.repository');
-const { generateToken } = require('../../../utils/jwtUtils');
+const { generateToken } = require('@utils/jwtUtils');
 
 
 class AuthController extends BaseController {
