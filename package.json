@@ -25,6 +25,7 @@
   "_moduleAliases": {
     "@utils": "src/utils",
     "@controllers": "src/controllers",
-    "@models": "src/models"
+    "@models": "src/models",
+    "@modules": "src/app/modules"
   }
 }
