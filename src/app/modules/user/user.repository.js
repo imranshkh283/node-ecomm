@@ -1,5 +1,5 @@
 const User = require('./user.model');
-
+const { hashPassword } = require('@utils/jwtUtils');
 class UserRepository {
     constructor() { }
 
@@ -18,7 +18,14 @@ class UserRepository {
     }
 
     static async isEmailExists(email) {
-        return await User.exists({ email });
+
+        const emailExists = await User.exists({ email });
+        return !!emailExists;
+    }
+
+    static async updatePassword(email, password) {
+        const hashPassword = await hashPassword(password)
+        return await User.findOneAndUpdate({ email }, { password });
     }
 
 }

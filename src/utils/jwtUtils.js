@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const BACKEND_JWT_SECRET = process.env.BACKEND_JWT_SECRET || 'BACKEND_JWT_SECRET';
+
+const hashPassword = (password) => {
+    return bcrypt.hash(password, 10);
+};
 
 const generateToken = (user) => {
     const payload = {
@@ -8,7 +13,7 @@ const generateToken = (user) => {
         email: user.email
     };
     const options = {
-        expiresIn: '1day'
+        expiresIn: '60h'
     };
     const secret = BACKEND_JWT_SECRET;
 
@@ -21,6 +26,7 @@ const verifyToken = (token) => {
 };
 
 module.exports = {
+    hashPassword,
     generateToken,
-    verifyToken
+    verifyToken,
 };
